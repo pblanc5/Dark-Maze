@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 [ExecuteInEditMode]
 public class ScannerEffectDemo : MonoBehaviour
@@ -8,6 +9,9 @@ public class ScannerEffectDemo : MonoBehaviour
 	public float ScanDistance;
     public float ScanSpeed;
 
+    private Transform GoalOrigin;
+    public float GoalScanDistance;
+    public float GoalScanSpeed;
 	private Camera _camera;
     private float MaxScan;
 
@@ -16,20 +20,22 @@ public class ScannerEffectDemo : MonoBehaviour
 
 	void Start()
 	{
-        GameObject g = GameObject.FindGameObjectWithTag("Jammer");
-        print(g.name);
+        GoalOrigin = GameObject.FindGameObjectWithTag("Finish").transform;
         ScanDistance = 0;
+        GoalScanDistance = 0;
+        GoalScanSpeed = 10;
         ScanSpeed = 4;
         MaxScan = -1;
+
+        StartCoroutine(TheEndlessHellOfSysiphus());
     }
 
 	void Update()
 	{
-        if (_scanning && (MaxScan == -1 || ScanDistance < MaxScan))
-        {
+        GoalScanDistance += Time.deltaTime * GoalScanSpeed;
 
+        if (_scanning && (MaxScan == -1 || ScanDistance < MaxScan))
             ScanDistance += Time.deltaTime * ScanSpeed / (MaxScan == -1 ? 1 : 3);
-        }
 
         if (OVRInput.GetDown(OVRInput.Button.One))
 		{
@@ -51,20 +57,23 @@ public class ScannerEffectDemo : MonoBehaviour
 		}*/
 	}
 
+    private IEnumerator TheEndlessHellOfSysiphus()
+    {
+        yield return new WaitForSeconds(7f);
+        GoalScanDistance = 0;
+        StartCoroutine(TheEndlessHellOfSysiphus());
+    }
+
     public void OnTriggerEnter(Collider jammer)
     {
         if (jammer.gameObject.tag.Equals("Jammer"))
-        {
             MaxScan = 3;
-        }
     }
 
     public void OnTriggerExit(Collider jammer)
     {
         if (jammer.gameObject.tag.Equals("Jammer"))
-        {
             MaxScan = -1;
-        }
     }
 
     void OnEnable()
@@ -78,7 +87,9 @@ public class ScannerEffectDemo : MonoBehaviour
 	{
 		EffectMaterial.SetVector("_WorldSpaceScannerPos", ScannerOrigin.position);
 		EffectMaterial.SetFloat("_ScanDistance", ScanDistance);
-		RaycastCornerBlit(src, dst, EffectMaterial);
+        EffectMaterial.SetVector("_GoalWorldSpaceScannerPos", GoalOrigin.position);
+        EffectMaterial.SetFloat("_GoalScanDistance", GoalScanDistance);
+        RaycastCornerBlit(src, dst, EffectMaterial);
 	}
 
 	void RaycastCornerBlit(RenderTexture source, RenderTexture dest, Material mat)

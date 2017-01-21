@@ -35,6 +35,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
+        name: _GoalScanDistance
+      second: 10.799999
+    - first:
         name: _HBarVisibility
       second: 0.2
     - first:
@@ -50,6 +53,18 @@ Material:
         name: _Width
       second: 16
     m_Colors:
+    - first:
+        name: _GoalHBarColor
+      second: {r: 0, g: 0, b: 0, a: 0}
+    - first:
+        name: _GoalLeadColor
+      second: {r: 1, g: 1, b: 1, a: 0}
+    - first:
+        name: _GoalMidColor
+      second: {r: 0.18129407, g: 0.49264705, b: 0, a: 0}
+    - first:
+        name: _GoalTrailColor
+      second: {r: 0.0852434, g: 0.30147058, b: 0, a: 0}
     - first:
         name: _HBarColor
       second: {r: 0.021950686, g: 0.051470578, b: 0.050197177, a: 0}
