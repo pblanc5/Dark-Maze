@@ -5,12 +5,17 @@
 		_MainTex("Texture", 2D) = "white" {}
 		_DetailTex("Texture", 2D) = "white" {}
 		_ScanDistance("Scan Distance", float) = 0
+        _GoalScanDistance("Goal Scan Distance", float) = 0
 		_ScanWidth("Scan Width", float) = 0.01
 		_LeadSharp("Leading Edge Sharpness", float) = 10
 		_LeadColor("Leading Edge Color", Color) = (1, 1, 1, 0)
 		_MidColor("Mid Color", Color) = (1, 1, 1, 0)
 		_TrailColor("Trail Color", Color) = (1, 1, 1, 0)
 		_HBarColor("Horizontal Bar Color", Color) = (0.5, 0.5, 0.5, 0)
+        _GoalLeadColor("Leading Edge Color", Color) = (1, 1, 1, 0)
+        _GoalMidColor("Mid Color", Color) = (1, 1, 1, 0)
+        _GoalTrailColor("Trail Color", Color) = (1, 1, 1, 0)
+        _GoalHBarColor("Goal Horizontal Bar Color", Color) = (0.5, 0.5, 0.5, 0)
 	}
 	SubShader
 	{
@@ -64,13 +69,19 @@
 			sampler2D _DetailTex;
 			sampler2D_float _CameraDepthTexture;
 			float4 _WorldSpaceScannerPos;
+            float4 _GoalWorldSpaceScannerPos;
 			float _ScanDistance;
+            float _GoalScanDistance;
 			float _ScanWidth;
 			float _LeadSharp;
 			float4 _LeadColor;
 			float4 _MidColor;
 			float4 _TrailColor;
+            float4 _GoalLeadColor;
+            float4 _GoalMidColor;
+            float4 _GoalTrailColor;
 			float4 _HBarColor;
+            float4 _GoalHBarColor;
 
 			float4 horizBars(float2 p)
 			{
@@ -93,6 +104,7 @@
 				half4 scannerCol = half4(0, 0, 0, 0);
 
 				float dist = distance(wsPos, _WorldSpaceScannerPos);
+                float goaldist = distance(wsPos, _GoalWorldSpaceScannerPos);
 
 				if (dist < _ScanDistance && dist > _ScanDistance - _ScanWidth && linearDepth < 1)
 				{
@@ -101,6 +113,13 @@
 					scannerCol = lerp(_TrailColor, edge, diff) + horizBars(i.uv) * _HBarColor;
 					scannerCol *= diff;
 				}
+                if (goaldist < _GoalScanDistance && goaldist > _GoalScanDistance - _ScanWidth && linearDepth < 1)
+                {
+                    float diff = 1 - (_GoalScanDistance - goaldist) / (_ScanWidth);
+                    half4 edge = lerp(_GoalMidColor, _GoalLeadColor, pow(diff, _LeadSharp));
+                    scannerCol += lerp(_GoalTrailColor, edge, diff) + horizBars(i.uv) * _GoalHBarColor;
+                    scannerCol *= diff;
+                }
 
 				return col + scannerCol;
 			}

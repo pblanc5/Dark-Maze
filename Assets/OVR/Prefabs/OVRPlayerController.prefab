@@ -754,3 +754,5 @@ MonoBehaviour:
   EffectMaterial: {fileID: 2100000, guid: 0d9079b2a57addc42bc122b2732e59b1, type: 2}
   ScanDistance: 0
   ScanSpeed: 4
+  GoalScanDistance: 6.866667
+  GoalScanSpeed: 10
