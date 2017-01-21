@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 11493974}
   m_Layer: 0
   m_Name: OVRPlayerController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +183,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.92, y: 0.5226822, z: -10.75}
+  m_LocalPosition: {x: 1.20565, y: -1.64, z: -1.1105571}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -754,5 +754,5 @@ MonoBehaviour:
   EffectMaterial: {fileID: 2100000, guid: 0d9079b2a57addc42bc122b2732e59b1, type: 2}
   ScanDistance: 0
   ScanSpeed: 4
-  GoalScanDistance: 6.866667
+  GoalScanDistance: 10.4
   GoalScanSpeed: 10
