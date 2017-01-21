@@ -19,7 +19,7 @@ public class timer : MonoBehaviour {
 	void Update () {
         //timerCount += Time.deltaTime;
         timerCount = timerCount.Add(TimeSpan.FromSeconds(Time.deltaTime));
-        string timeText = string.Format("{0:D2}:{1:D2}:{2:D2}", timerCount.Minutes, timerCount.Seconds, timerCount.Milliseconds);
+        string timeText = string.Format("{0:D2}:{1:D2}:{2:D2}", timerCount.Minutes, timerCount.Seconds, timerCount.Milliseconds.ToString().Substring(0,2));
         timerText.text = timeText;
     }
 }
