@@ -42,10 +42,10 @@ Material:
       second: 25
     - first:
         name: _ScanDistance
-      second: 0
+      second: 21.71625
     - first:
         name: _ScanWidth
-      second: 10
+      second: 2
     - first:
         name: _Width
       second: 16
@@ -58,7 +58,7 @@ Material:
       second: {r: 1, g: 1, b: 1, a: 0}
     - first:
         name: _MidColor
-      second: {r: 0.18940164, g: 0.33088237, b: 0, a: 0}
+      second: {r: 0.025101375, g: 0, b: 0.33088237, a: 0}
     - first:
         name: _TrailColor
       second: {r: 0, g: 1, b: 0.95862055, a: 0}

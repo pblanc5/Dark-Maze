@@ -5,7 +5,7 @@
 		_MainTex("Texture", 2D) = "white" {}
 		_DetailTex("Texture", 2D) = "white" {}
 		_ScanDistance("Scan Distance", float) = 0
-		_ScanWidth("Scan Width", float) = 10
+		_ScanWidth("Scan Width", float) = 0.01
 		_LeadSharp("Leading Edge Sharpness", float) = 10
 		_LeadColor("Leading Edge Color", Color) = (1, 1, 1, 0)
 		_MidColor("Mid Color", Color) = (1, 1, 1, 0)
