@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class timer : MonoBehaviour {
 
@@ -9,11 +10,16 @@ public class timer : MonoBehaviour {
 	void Start () {
 		
 	}
-    float timerCount = 0.0F;
+
+    //float timerCount = 0.0F;
     public Text timerText;
+    TimeSpan timerCount;
+    
 	// Update is called once per frame
 	void Update () {
-        timerCount += Time.deltaTime;
-        timerText.text = "Time: " + Mathf.Round(timerCount);
-	}
+        //timerCount += Time.deltaTime;
+        timerCount = timerCount.Add(TimeSpan.FromSeconds(Time.deltaTime));
+        string timeText = string.Format("{0:D2}:{1:D2}:{2:D2}", timerCount.Hours, timerCount.Minutes, timerCount.Seconds);
+        timerText.text = timeText;
+    }
 }
