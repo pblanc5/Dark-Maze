@@ -37,16 +37,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1592517cf81484424a60f86dfcafc7eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ad007ae8591b6a45850edca479b6084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   size:
-    x: 10
-    z: 10
-  cellPrefab: {fileID: 11400000, guid: 8cc5710f710a24360a566370d7049cf8, type: 2}
-  generationStepDelay: 0.01
-  passagePrefab: {fileID: 11400000, guid: 4db582300649e4e399ee4a2665f9e8e6, type: 2}
-  wallPrefab: {fileID: 11400000, guid: 2970089c471ef4c599835c1992954af5, type: 2}
+    x: 15
+    z: 15
+  scale: 2
+  cellPrefab: {fileID: 11400000, guid: 52ba5876db0f4704dbf82302e1a037f3, type: 2}
+  generationStepDelay: 0
+  passagePrefab: {fileID: 11400000, guid: dc1431d8e803cc2428695ae6c8abe06d, type: 2}
+  wallPrefab: {fileID: 11400000, guid: 3d130b5767e8395439533bff8ba202bd, type: 2}
+  player: {fileID: 11400010, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 2}
+  goal: {fileID: 1990039285048006, guid: a77920379e45e3445be0a0c7783f67c7, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

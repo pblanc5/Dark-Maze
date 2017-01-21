@@ -36,7 +36,7 @@ Material:
     m_Floats:
     - first:
         name: _GoalScanDistance
-      second: 10.799999
+      second: 13.733333
     - first:
         name: _HBarVisibility
       second: 0.2
