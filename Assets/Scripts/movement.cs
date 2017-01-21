@@ -10,7 +10,7 @@ public class movement : MonoBehaviour {
 	}
 
     // Update is called once per frame
-    public float speed = 5.0f;
+    float speed = 5.0f;
     void Update()
     {
         if (Input.GetKey(KeyCode.RightArrow))
