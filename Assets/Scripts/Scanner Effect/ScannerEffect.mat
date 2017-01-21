@@ -42,7 +42,7 @@ Material:
       second: 25
     - first:
         name: _ScanDistance
-      second: 31.268599
+      second: 0
     - first:
         name: _ScanWidth
       second: 2
@@ -52,7 +52,7 @@ Material:
     m_Colors:
     - first:
         name: _HBarColor
-      second: {r: 0, g: 0.28676468, b: 0.27439448, a: 0}
+      second: {r: 0.021950686, g: 0.051470578, b: 0.050197177, a: 0}
     - first:
         name: _LeadColor
       second: {r: 1, g: 1, b: 1, a: 0}

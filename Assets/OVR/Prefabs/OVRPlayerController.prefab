@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 2015248}
   - component: {fileID: 11414578}
   - component: {fileID: 114046050662321178}
+  - component: {fileID: 65820130452517790}
   m_Layer: 0
   m_Name: CenterEyeAnchor
   m_TagString: MainCamera
@@ -182,7 +183,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2811775, y: 0.5226822, z: -20.02}
+  m_LocalPosition: {x: 3.92, y: 0.5226822, z: -10.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -726,6 +727,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1392046973483160}
   m_Mesh: {fileID: 4300000, guid: 63476e7bc4414934c878800cf0dc37ab, type: 3}
+--- !u!65 &65820130452517790
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114046050662321178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -740,4 +753,4 @@ MonoBehaviour:
   ScannerOrigin: {fileID: 400012}
   EffectMaterial: {fileID: 2100000, guid: 0d9079b2a57addc42bc122b2732e59b1, type: 2}
   ScanDistance: 0
-  ScanSpeed: 3
+  ScanSpeed: 4

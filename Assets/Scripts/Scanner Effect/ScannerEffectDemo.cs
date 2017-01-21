@@ -9,20 +9,27 @@ public class ScannerEffectDemo : MonoBehaviour
     public float ScanSpeed;
 
 	private Camera _camera;
+    private float MaxScan;
 
 	// Demo Code
 	bool _scanning;
 
 	void Start()
 	{
+        GameObject g = GameObject.FindGameObjectWithTag("Jammer");
+        print(g.name);
         ScanDistance = 0;
-        ScanSpeed = 10;
+        ScanSpeed = 4;
+        MaxScan = -1;
     }
 
 	void Update()
 	{
-		if (_scanning)
-			ScanDistance += Time.deltaTime * ScanSpeed;
+        if (_scanning && (MaxScan == -1 || ScanDistance < MaxScan))
+        {
+
+            ScanDistance += Time.deltaTime * ScanSpeed / (MaxScan == -1 ? 1 : 3);
+        }
 
         if (OVRInput.GetDown(OVRInput.Button.One))
 		{
@@ -43,9 +50,24 @@ public class ScannerEffectDemo : MonoBehaviour
 			}
 		}*/
 	}
-	// End Demo Code
 
-	void OnEnable()
+    public void OnTriggerEnter(Collider jammer)
+    {
+        if (jammer.gameObject.tag.Equals("Jammer"))
+        {
+            MaxScan = 3;
+        }
+    }
+
+    public void OnTriggerExit(Collider jammer)
+    {
+        if (jammer.gameObject.tag.Equals("Jammer"))
+        {
+            MaxScan = -1;
+        }
+    }
+
+    void OnEnable()
 	{
         _camera = GetComponent<Camera>();
         _camera.depthTextureMode = DepthTextureMode.Depth;
