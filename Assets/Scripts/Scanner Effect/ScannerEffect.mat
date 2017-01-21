@@ -42,7 +42,7 @@ Material:
       second: 25
     - first:
         name: _ScanDistance
-      second: 21.71625
+      second: 31.268599
     - first:
         name: _ScanWidth
       second: 2
