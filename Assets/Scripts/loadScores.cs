@@ -39,11 +39,8 @@ public class loadScores : MonoBehaviour {
     {
         string name = row.name;
         TimeSpan time = row.time;
-        Debug.Log(time.ToString());
-        Debug.Log("hours " + time.Hours.ToString());
         string line = (position + 1).ToString() + ". " + name + " " + time.Minutes + ":" + time.Seconds + ":" + time.Milliseconds;
         string objName = "Name" + (position + 1).ToString();
         GameObject.Find(objName).GetComponent<UnityEngine.UI.Text>().text = line;
-        Debug.Log("line is " + line);
     }
 }
