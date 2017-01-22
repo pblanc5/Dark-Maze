@@ -14,6 +14,7 @@ public class ScannerEffectDemo : MonoBehaviour
     public float GoalScanSpeed;
 	private Camera _camera;
     private float MaxScan;
+    private AudioSource pingsound;
 
     private Vector3 ScannerOriginPosition;
 
@@ -28,6 +29,7 @@ public class ScannerEffectDemo : MonoBehaviour
         GoalScanSpeed = 10;
         ScanSpeed = 4;
         MaxScan = -1;
+        pingsound = gameObject.GetComponent<AudioSource>();
 
         StartCoroutine(TheEndlessHellOfSysiphus());
     }
@@ -44,6 +46,8 @@ public class ScannerEffectDemo : MonoBehaviour
 			_scanning = true;
 			ScanDistance = 0;
             ScannerOriginPosition = ScannerOrigin.position;
+            pingsound.pitch = Random.Range(0.8f, 1.1f);
+            pingsound.Play();
 		}
 
 		/*if (Input.GetMouseButtonDown(0))
