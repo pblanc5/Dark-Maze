@@ -13,4 +13,11 @@ public struct IntVector2 {
 		a.z += b.z;
 		return a;
 	}
+
+    public static IntVector2 operator * (IntVector2 a, IntVector2 b)
+    {
+        a.x *= b.x;
+        a.z *= b.z;
+        return a;
+    }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Maze : MonoBehaviour {
 
 	public IntVector2 size;
+    public float scale;
 
 	public MazeCell cellPrefab;
 
@@ -12,8 +13,12 @@ public class Maze : MonoBehaviour {
 
 	public MazePassage passagePrefab;
 	public MazeWall wallPrefab;
+    public GameObject player;
+    public GameObject goal;
 
 	private MazeCell[,] cells;
+
+    private bool flag = false;
 
 	public IntVector2 RandomCoordinates {
 		get {
@@ -38,6 +43,7 @@ public class Maze : MonoBehaviour {
 			yield return delay;
 			DoNextGenerationStep(activeCells);
 		}
+
 	}
 
 	private void DoFirstGenerationStep (List<MazeCell> activeCells) {
@@ -52,7 +58,7 @@ public class Maze : MonoBehaviour {
 			return;
 		}
 		MazeDirection direction = currentCell.RandomUninitializedDirection;
-		IntVector2 coordinates = currentCell.coordinates + direction.ToIntVector2();
+		IntVector2 coordinates = currentCell.coordinates + direction.ToIntVector2() * new IntVector2(2,2);
 		if (ContainsCoordinates(coordinates)) {
 			MazeCell neighbor = GetCell(coordinates);
 			if (neighbor == null) {
@@ -73,7 +79,20 @@ public class Maze : MonoBehaviour {
 		MazeCell newCell = Instantiate(cellPrefab) as MazeCell;
 		cells[coordinates.x, coordinates.z] = newCell;
 		newCell.coordinates = coordinates;
-		newCell.name = "Maze Cell " + coordinates.x + ", " + coordinates.z;
+		newCell.name = "Maze Cell " + coordinates.x / 2 + ", " + coordinates.z / 2;
+        if (!flag)
+        {
+            flag = true;
+            player = GameObject.FindGameObjectWithTag("Player");
+            player.transform.parent = transform;
+            player.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 0.1f, coordinates.z - size.z * 0.5f + 0.5f);
+        }
+        else if (coordinates.x == 7)
+        {
+            goal = GameObject.FindGameObjectWithTag("Finish");
+            goal.transform.parent = transform;
+            goal.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 1f, coordinates.z - size.z * 0.5f + 0.5f);
+        }
 		newCell.transform.parent = transform;
 		newCell.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 0f, coordinates.z - size.z * 0.5f + 0.5f);
 		return newCell;
