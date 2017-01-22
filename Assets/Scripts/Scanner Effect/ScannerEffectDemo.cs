@@ -86,10 +86,10 @@ public class ScannerEffectDemo : MonoBehaviour
             Destroy(jammer.transform.parent.gameObject);
             MaxScan = -1;
         }
-        //else if (jammer.gameObject.name.Equals("Goal"))
-        //{
-        //    SceneManager.LoadScene(1);
-        //}
+        else if (jammer.gameObject.name.Equals("Goal"))
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
     public void OnTriggerExit(Collider jammer)
