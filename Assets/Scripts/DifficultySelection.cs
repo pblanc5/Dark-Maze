@@ -13,6 +13,7 @@ public class DifficultySelection : MonoBehaviour {
         if (other.gameObject.name == "EasyText")
         {
             easy = true;
+            SceneManager.LoadScene(3);
         }
         else if (other.gameObject.name == "MediumText")
         {
@@ -22,6 +23,7 @@ public class DifficultySelection : MonoBehaviour {
         else if (other.gameObject.name == "HardText")
         {
             hard = true;
+            SceneManager.LoadScene(4);
         }
         else if (other.gameObject.name == "Scoreboard")
         {
