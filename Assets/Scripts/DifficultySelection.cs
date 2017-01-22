@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DifficultySelection : MonoBehaviour {
     public bool easy = false;
@@ -20,6 +21,14 @@ public class DifficultySelection : MonoBehaviour {
         else if (other.gameObject.name == "HardText")
         {
             hard = true;
+        }
+        else if (other.gameObject.name == "Scoreboard")
+        {
+            SceneManager.LoadScene(1);
+        }
+        else if (other.gameObject.name == "Back")
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
