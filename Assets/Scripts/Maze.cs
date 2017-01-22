@@ -122,4 +122,14 @@ public class Maze : MonoBehaviour {
 			wall.Initialize(otherCell, cell, direction.GetOpposite());
 		}
 	}
+
+    private void OnDestroy()
+    {
+        cells  = null;
+        player = null;
+        goal   = null;
+        jammer = null;
+        flag   = false;
+        jammercount = 0;
+    }
 }
