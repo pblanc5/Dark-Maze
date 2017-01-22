@@ -43,7 +43,7 @@ MonoBehaviour:
   size:
     x: 15
     z: 15
-  scale: 0
+  scale: 2
   cellPrefab: {fileID: 11400000, guid: 06d6d36732e568c409eae1c5ee6aed9b, type: 2}
   generationStepDelay: 0
   passagePrefab: {fileID: 11400000, guid: 75de89476b72a4147acb54ed2e30b6bd, type: 2}
