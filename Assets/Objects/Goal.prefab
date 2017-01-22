@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 65500331837476358}
   - component: {fileID: 23953624077680400}
   - component: {fileID: 82664337037683172}
+  - component: {fileID: 114615009854737652}
+  - component: {fileID: 54516855899009850}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Finish
@@ -81,6 +83,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1990039285048006}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54516855899009850
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990039285048006}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!65 &65500331837476358
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -173,3 +190,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114615009854737652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990039285048006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d17df5d1d885d4192e42a0e4dc6f42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
