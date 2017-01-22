@@ -76,10 +76,11 @@ public class Database : MonoBehaviour {
     {
         curUID++;
         DB.Add(new row(curUID, name, time));
+        String timeFormatted = string.Format("{0}:{1}:{2}.{3}", time.Hours, time.Minutes, time.Seconds, time.Milliseconds);
         using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(@FILENAME, true))
         {
-            file.WriteLine(string.Format( "{0} {1} {2}", curUID, name, time));
+            file.WriteLine(string.Format( "{0} {1} {2}", curUID, name, timeFormatted));
         } 
     }
 
