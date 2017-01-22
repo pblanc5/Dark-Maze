@@ -4,12 +4,21 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
 	public Maze mazePrefab;
-
 	private Maze mazeInstance;
 
-	private void Start () {
+    Database db = new Database();
+    public enum level
+    {
+        SMALL,
+        MEDIUM,
+        LARGE
+    }
+
+
+    private void Start () {
 		BeginGame();
-	}
+        db.initDB();
+    }
 	
 	private void Update () {
 		if (Input.GetKeyDown(KeyCode.Space)) {
