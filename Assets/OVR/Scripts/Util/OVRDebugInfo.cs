@@ -134,7 +134,7 @@ public class OVRDebugInfo : MonoBehaviour
         }
         else
         {
-            //debugUIManager.SetActive(false);
+            debugUIManager.SetActive(false);
         }
     }
 

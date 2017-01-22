@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: ScannerEffect
-  m_Shader: {fileID: 4800000, guid: 2753a9bb72ffb1d42820bd03a83441c2, type: 3}
+  m_Shader: {fileID: 4800000, guid: 1d488995e5d8eac4a8f19b3dc50a09b5, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -36,7 +36,7 @@ Material:
     m_Floats:
     - first:
         name: _GoalScanDistance
-      second: 13.733333
+      second: 6.866667
     - first:
         name: _HBarVisibility
       second: 0.2
