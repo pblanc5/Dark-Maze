@@ -183,7 +183,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0670958, y: -1.4557924, z: 2.789238}
+  m_LocalPosition: {x: 2.0473118, y: -2.7, z: -1.0058852}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -406,7 +406,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df8e1d778abf442e4bec449c360e9e1c, type: 3}
+  m_Script: {fileID: 11500000, guid: 374e6dc2e07ec834e986530087239657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: 2
@@ -747,12 +747,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79151f9244582f645b57853312bb857a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b0a6a7c849dff64d98d0cfbaf40d26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ScannerOrigin: {fileID: 400012}
-  EffectMaterial: {fileID: 2100000, guid: 0d9079b2a57addc42bc122b2732e59b1, type: 2}
+  EffectMaterial: {fileID: 2100000, guid: 9f9b1452b21e0d04fa1c280ff6da676e, type: 2}
   ScanDistance: 0
   ScanSpeed: 4
-  GoalScanDistance: 10.4
+  GoalScanDistance: 20.4
   GoalScanSpeed: 10

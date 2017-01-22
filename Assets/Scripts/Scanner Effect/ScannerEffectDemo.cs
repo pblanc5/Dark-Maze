@@ -15,6 +15,8 @@ public class ScannerEffectDemo : MonoBehaviour
 	private Camera _camera;
     private float MaxScan;
 
+    private Vector3 ScannerOriginPosition;
+
 	// Demo Code
 	bool _scanning;
 
@@ -41,6 +43,7 @@ public class ScannerEffectDemo : MonoBehaviour
 		{
 			_scanning = true;
 			ScanDistance = 0;
+            ScannerOriginPosition = ScannerOrigin.position;
 		}
 
 		/*if (Input.GetMouseButtonDown(0))
@@ -85,7 +88,7 @@ public class ScannerEffectDemo : MonoBehaviour
 	[ImageEffectOpaque]
 	void OnRenderImage(RenderTexture src, RenderTexture dst)
 	{
-		EffectMaterial.SetVector("_WorldSpaceScannerPos", ScannerOrigin.position);
+		EffectMaterial.SetVector("_WorldSpaceScannerPos", ScannerOriginPosition);
 		EffectMaterial.SetFloat("_ScanDistance", ScanDistance);
         EffectMaterial.SetVector("_GoalWorldSpaceScannerPos", GoalOrigin.position);
         EffectMaterial.SetFloat("_GoalScanDistance", GoalScanDistance);
