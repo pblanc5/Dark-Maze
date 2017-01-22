@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[ExecuteInEditMode]
 public class ScannerEffectDemo : MonoBehaviour
 {
 	public Transform ScannerOrigin;
@@ -15,23 +14,30 @@ public class ScannerEffectDemo : MonoBehaviour
 	private Camera _camera;
     private float MaxScan;
     private AudioSource pingsound;
+    private AudioSource goalpingsound;
 
     private Vector3 ScannerOriginPosition;
-
-	// Demo Code
+    private float goaldistance;
+    private bool goalpinged;
+    
 	bool _scanning;
+    bool scandelay;
+    float scandelaytime;
 
 	void Start()
 	{
-        GoalOrigin = GameObject.FindGameObjectWithTag("Finish").transform;
-        ScanDistance = 0;
+        GameObject goal  = GameObject.FindGameObjectWithTag("Finish");
+        GoalOrigin       = goal.transform;
+        ScanDistance     = 0;
+        ScanSpeed        = 4;
         GoalScanDistance = 0;
-        GoalScanSpeed = 10;
-        ScanSpeed = 4;
-        MaxScan = -1;
-        pingsound = gameObject.GetComponent<AudioSource>();
-
-        StartCoroutine(TheEndlessHellOfSysiphus());
+        GoalScanSpeed    = 10;
+        goaldistance     = 0;
+        MaxScan          = -1;
+        pingsound        = gameObject.GetComponent<AudioSource>();
+        goalpingsound    = goal.GetComponent<AudioSource>();
+        scandelay        = false;
+        scandelaytime    = 1f;
     }
 
 	void Update()
@@ -39,42 +45,46 @@ public class ScannerEffectDemo : MonoBehaviour
         GoalScanDistance += Time.deltaTime * GoalScanSpeed;
 
         if (_scanning && (MaxScan == -1 || ScanDistance < MaxScan))
+        {
             ScanDistance += Time.deltaTime * ScanSpeed / (MaxScan == -1 ? 1 : 3);
+            if (ScanDistance > goaldistance - 2.2 && ScanDistance < goaldistance + 2.2)
+            {
+                goalpingsound.pitch = Random.Range(0.8f, 1f);
+                goalpingsound.Play();
+                GoalScanDistance = 0;
+            }
+        }
 
-        if (OVRInput.GetDown(OVRInput.Button.One))
+        if (OVRInput.GetDown(OVRInput.Button.One) && !scandelay)
 		{
+            scandelay = true;
 			_scanning = true;
 			ScanDistance = 0;
             ScannerOriginPosition = ScannerOrigin.position;
             pingsound.pitch = Random.Range(0.8f, 1.1f);
             pingsound.Play();
+
+            goaldistance = Vector3.Distance(transform.position, GoalOrigin.position);
+            scandelaytime = MaxScan == -1 ? (goaldistance / ScanSpeed + goaldistance / GoalScanSpeed) : 1f;
+            StartCoroutine(WaitForGoalPing());
 		}
-
-		/*if (Input.GetMouseButtonDown(0))
-		{
-			Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-
-			if (Physics.Raycast(ray, out hit))
-			{
-				_scanning = true;
-				ScanDistance = 0;
-				ScannerOrigin.position = hit.point;
-			}
-		}*/
 	}
 
-    private IEnumerator TheEndlessHellOfSysiphus()
+    private IEnumerator WaitForGoalPing()
     {
-        yield return new WaitForSeconds(7f);
-        GoalScanDistance = 0;
-        StartCoroutine(TheEndlessHellOfSysiphus());
+        yield return new WaitForSeconds(scandelaytime);
+        scandelay = false;
     }
 
     public void OnTriggerEnter(Collider jammer)
     {
-        if (jammer.gameObject.tag.Equals("Jammer"))
+        if (jammer.gameObject.name.Equals("Jammer(Clone)"))
             MaxScan = 3;
+        else if (jammer.gameObject.name.Equals("JammerTrig"))
+        {
+            Destroy(jammer.transform.parent.gameObject);
+            MaxScan = -1;
+        }
     }
 
     public void OnTriggerExit(Collider jammer)
