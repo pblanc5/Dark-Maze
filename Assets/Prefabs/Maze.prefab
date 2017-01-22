@@ -41,8 +41,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size:
-    x: 16
-    z: 16
+    x: 12
+    z: 12
   scale: 2
   cellPrefab: {fileID: 11400000, guid: 06d6d36732e568c409eae1c5ee6aed9b, type: 2}
   generationStepDelay: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   player: {fileID: 0}
   goal: {fileID: 0}
   jammer: {fileID: 1161266805216832, guid: d858799ea595f2c43b52f1bb37338563, type: 2}
+  jammercount: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

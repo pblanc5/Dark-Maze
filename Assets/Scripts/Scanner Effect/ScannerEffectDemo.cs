@@ -175,4 +175,17 @@ public class ScannerEffectDemo : MonoBehaviour
 		GL.End();
 		GL.PopMatrix();
 	}
+
+    public void OnDestroy()
+    {
+        GoalOrigin = null;
+        ScanDistance = 0;
+        ScanSpeed = 4;
+        GoalScanDistance = 0;
+        GoalScanSpeed = 10;
+        goaldistance = 0;
+        MaxScan = -1;
+        scandelay = false;
+        scandelaytime = 1f;
+    }
 }

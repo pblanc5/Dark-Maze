@@ -19,10 +19,19 @@ public class Maze : MonoBehaviour {
 
     private MazeCell[,] cells;
 
-    private bool flag = false;
-    private int jammercount = 0;
+    private bool flag;
+    private bool nogoal;
+    public int jammercount;
 
-	public IntVector2 RandomCoordinates {
+    public void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        goal = GameObject.FindGameObjectWithTag("Finish");
+        flag = false;
+        nogoal = true;
+    }
+
+    public IntVector2 RandomCoordinates {
 		get {
 			return new IntVector2(Random.Range(0, size.x), Random.Range(0, size.z));
 		}
@@ -60,7 +69,7 @@ public class Maze : MonoBehaviour {
 			return;
 		}
 		MazeDirection direction = currentCell.RandomUninitializedDirection;
-		IntVector2 coordinates = currentCell.coordinates + direction.ToIntVector2() * new IntVector2(2,2);
+        IntVector2 coordinates = currentCell.coordinates + direction.ToIntVector2();// * new IntVector2((int)scale, (int)scale);
 		if (ContainsCoordinates(coordinates)) {
 			MazeCell neighbor = GetCell(coordinates);
 			if (neighbor == null) {
@@ -81,29 +90,28 @@ public class Maze : MonoBehaviour {
 		MazeCell newCell = Instantiate(cellPrefab) as MazeCell;
 		cells[coordinates.x, coordinates.z] = newCell;
 		newCell.coordinates = coordinates;
-		newCell.name = "Maze Cell " + coordinates.x / 2 + ", " + coordinates.z / 2;
-        if (!flag)
+		newCell.name = "Maze Cell " + coordinates.x / scale + ", " + coordinates.z / scale;
+        if (coordinates.x == 0 && !flag)
         {
             flag = true;
-            player = GameObject.FindGameObjectWithTag("Player");
             player.transform.parent = transform;
-            player.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 0.1f, coordinates.z - size.z * 0.5f + 0.5f);
+            player.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f * scale + 0.5f, 0.1f, coordinates.z - size.z * 0.5f * scale + 0.5f);
         }
-        else if (coordinates.x == 7)
+        else if (coordinates.x == size.x - 1 && nogoal)
         {
-            goal = GameObject.FindGameObjectWithTag("Finish");
+            nogoal = false;
             goal.transform.parent = transform;
-            goal.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 1f, coordinates.z - size.z * 0.5f + 0.5f);
+            goal.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f * scale + 0.5f, 1f, coordinates.z - size.z * 0.5f * scale + 0.5f);
         }
-        else if (Random.Range(0, 99) < 10 && jammercount < 2)
+        else if (Random.Range(0, 99) < 10 && jammercount > 0)
         {
-            jammercount++;
+            jammercount--;
             GameObject jam = Instantiate(jammer);
             jam.transform.parent = transform;
-            jam.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 1f, coordinates.z - size.z * 0.5f + 0.5f);
+            jam.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f * scale + 0.5f, 1f, coordinates.z - size.z * 0.5f * scale + 0.5f);
         }
 		newCell.transform.parent = transform;
-		newCell.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 0f, coordinates.z - size.z * 0.5f + 0.5f);
+		newCell.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f * scale + 0.5f, 0f, coordinates.z - size.z * 0.5f * scale + 0.5f);
 		return newCell;
 	}
 
@@ -130,6 +138,7 @@ public class Maze : MonoBehaviour {
         goal   = null;
         jammer = null;
         flag   = false;
+        nogoal = true;
         jammercount = 0;
     }
 }
