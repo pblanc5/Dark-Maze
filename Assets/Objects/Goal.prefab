@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23953624077680400}
   - component: {fileID: 82664337037683172}
   - component: {fileID: 54516855899009850}
+  - component: {fileID: 114728863897478552}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Finish
@@ -189,3 +190,14 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114728863897478552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1990039285048006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b116494d336ac664f99ed4d775e8194e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
