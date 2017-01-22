@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour {
 	public Maze mazePrefab;
 	private Maze mazeInstance;
 
-    Database db = new Database();
     public enum level
     {
         SMALL,
@@ -16,6 +15,7 @@ public class GameManager : MonoBehaviour {
 
 
     private void Start () {
+        Database db = gameObject.AddComponent<Database>();
 		BeginGame();
         db.initDB();
     }
