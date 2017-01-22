@@ -28,3 +28,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# txt
+.txt
+
+# Database file
+db.dat
