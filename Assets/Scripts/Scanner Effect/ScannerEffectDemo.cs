@@ -32,7 +32,7 @@ public class ScannerEffectDemo : MonoBehaviour
         ScanDistance     = 0;
         ScanSpeed        = 4;
         GoalScanDistance = 0;
-        GoalScanSpeed    = 10;
+        GoalScanSpeed    = 6;
         goaldistance     = 0;
         MaxScan          = -1;
         pingsound        = gameObject.GetComponent<AudioSource>();

@@ -115,7 +115,7 @@
 				}
                 if (goaldist < _GoalScanDistance && goaldist > _GoalScanDistance - _ScanWidth && linearDepth < 1)
                 {
-                    float diff = 1 - (_GoalScanDistance - goaldist) / (_ScanWidth);
+                    float diff = 1 - (_GoalScanDistance - goaldist) / (_ScanWidth * 2);
                     half4 edge = lerp(_GoalMidColor, _GoalLeadColor, pow(diff, _LeadSharp));
                     scannerCol += lerp(_GoalTrailColor, edge, diff) + horizBars(i.uv) * _GoalHBarColor;
                     scannerCol *= diff;
