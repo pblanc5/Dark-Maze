@@ -8,7 +8,7 @@ public class timer : MonoBehaviour {
 
 
     //float timerCount = 0.0F;
-    public Text timerText;
+    //public Text timerText;
     TimeSpan timerCount;
 
     private bool finished;
@@ -25,14 +25,20 @@ public class timer : MonoBehaviour {
         if (!finished)
             timerCount = timerCount.Add(TimeSpan.FromSeconds(Time.deltaTime));
         else
-            timerText.color = new Color(100, 200, 100);
-        string timeText = string.Format("{0:D2}:{1:D2}:{2:D2}", timerCount.Minutes, timerCount.Seconds, returnShortMS(timerCount.Milliseconds));
-        timerText.text = timeText;
+            Debug.Log(timerCount.ToString());
+            //timerText.color = new Color(100, 200, 100);
+        //string timeText = string.Format("{0:D2}:{1:D2}:{2:D2}", timerCount.Minutes, timerCount.Seconds, returnShortMS(timerCount.Milliseconds));
+        //timerText.text = timeText;
     }
 
     public void StopTimer()
     {
         finished = true;
+    }
+
+    public TimeSpan getTimerCount()
+    {
+        return timerCount;
     }
 
     string returnShortMS (int milliseconds)
