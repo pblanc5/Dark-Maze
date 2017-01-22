@@ -15,10 +15,12 @@ public class Maze : MonoBehaviour {
 	public MazeWall wallPrefab;
     public GameObject player;
     public GameObject goal;
+    public GameObject jammer;
 
-	private MazeCell[,] cells;
+    private MazeCell[,] cells;
 
     private bool flag = false;
+    private int jammercount = 0;
 
 	public IntVector2 RandomCoordinates {
 		get {
@@ -92,6 +94,13 @@ public class Maze : MonoBehaviour {
             goal = GameObject.FindGameObjectWithTag("Finish");
             goal.transform.parent = transform;
             goal.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 1f, coordinates.z - size.z * 0.5f + 0.5f);
+        }
+        else if (Random.Range(0, 99) < 10 && jammercount < 2)
+        {
+            jammercount++;
+            GameObject jam = Instantiate(jammer);
+            jam.transform.parent = transform;
+            jam.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 1f, coordinates.z - size.z * 0.5f + 0.5f);
         }
 		newCell.transform.parent = transform;
 		newCell.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f + 0.5f, 0f, coordinates.z - size.z * 0.5f + 0.5f);

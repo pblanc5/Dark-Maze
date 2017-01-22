@@ -15,21 +15,26 @@ public class ScannerEffectDemo : MonoBehaviour
 	private Camera _camera;
     private float MaxScan;
     private AudioSource pingsound;
+    private AudioSource goalpingsound;
 
     private Vector3 ScannerOriginPosition;
 
 	// Demo Code
 	bool _scanning;
+    bool scandelay;
 
 	void Start()
 	{
-        GoalOrigin = GameObject.FindGameObjectWithTag("Finish").transform;
+        GameObject goal = GameObject.FindGameObjectWithTag("Finish");
+        GoalOrigin = goal.transform;
+        goalpingsound = goal.GetComponent<AudioSource>();
         ScanDistance = 0;
         GoalScanDistance = 0;
         GoalScanSpeed = 10;
         ScanSpeed = 4;
         MaxScan = -1;
         pingsound = gameObject.GetComponent<AudioSource>();
+        scandelay = false;
 
         StartCoroutine(TheEndlessHellOfSysiphus());
     }
@@ -41,8 +46,10 @@ public class ScannerEffectDemo : MonoBehaviour
         if (_scanning && (MaxScan == -1 || ScanDistance < MaxScan))
             ScanDistance += Time.deltaTime * ScanSpeed / (MaxScan == -1 ? 1 : 3);
 
-        if (OVRInput.GetDown(OVRInput.Button.One))
+        if (OVRInput.GetDown(OVRInput.Button.One) && !scandelay)
 		{
+            scandelay = true;
+            StartCoroutine(DelayScan());
 			_scanning = true;
 			ScanDistance = 0;
             ScannerOriginPosition = ScannerOrigin.position;
@@ -66,15 +73,28 @@ public class ScannerEffectDemo : MonoBehaviour
 
     private IEnumerator TheEndlessHellOfSysiphus()
     {
+        goalpingsound.pitch = Random.Range(0.8f, 1f);
+        goalpingsound.Play();
         yield return new WaitForSeconds(7f);
         GoalScanDistance = 0;
         StartCoroutine(TheEndlessHellOfSysiphus());
     }
 
+    private IEnumerator DelayScan()
+    {
+        yield return new WaitForSeconds(1f);
+        scandelay = false;
+    }
+
     public void OnTriggerEnter(Collider jammer)
     {
-        if (jammer.gameObject.tag.Equals("Jammer"))
+        if (jammer.gameObject.name.Equals("Jammer"))
             MaxScan = 3;
+        else if (jammer.gameObject.name.Equals("JammerTrig"))
+        {
+            Destroy(jammer.transform.parent.gameObject);
+            MaxScan = -1;
+        }
     }
 
     public void OnTriggerExit(Collider jammer)
