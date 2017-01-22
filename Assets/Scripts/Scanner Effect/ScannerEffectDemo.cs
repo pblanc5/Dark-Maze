@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ScannerEffectDemo : MonoBehaviour
 {
@@ -84,6 +85,10 @@ public class ScannerEffectDemo : MonoBehaviour
         {
             Destroy(jammer.transform.parent.gameObject);
             MaxScan = -1;
+        }
+        else if (jammer.gameObject.name.Equals("Goal"))
+        {
+            SceneManager.LoadScene(1);
         }
     }
 

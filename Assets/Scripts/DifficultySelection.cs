@@ -17,6 +17,7 @@ public class DifficultySelection : MonoBehaviour {
         else if (other.gameObject.name == "MediumText")
         {
             medium = true;
+            SceneManager.LoadScene(2);
         }
         else if (other.gameObject.name == "HardText")
         {
