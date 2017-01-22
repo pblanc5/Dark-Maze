@@ -732,7 +732,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b0a6a7c849dff64d98d0cfbaf40d26d, type: 3}
   m_Name: 
@@ -740,6 +740,6 @@ MonoBehaviour:
   ScannerOrigin: {fileID: 400012}
   EffectMaterial: {fileID: 2100000, guid: 9f9b1452b21e0d04fa1c280ff6da676e, type: 2}
   ScanDistance: 0
-  ScanSpeed: 4
-  GoalScanDistance: 6.866667
+  ScanSpeed: 3
+  GoalScanDistance: 10.369991
   GoalScanSpeed: 10
