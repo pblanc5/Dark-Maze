@@ -4,14 +4,13 @@ using UnityEngine;
 using System;
 
 public class loadScores : MonoBehaviour {
-    Database DB = new Database();
     // Use this for initialization
     void Start () {
         List<Database.row> scoreList = getScores();
         int count = scoreList.Count;
         for (int i = 0; i <= 8; i++)
         {
-            if (i > count)
+            if (i >= count)
             {
                 break;
             }
@@ -29,6 +28,7 @@ public class loadScores : MonoBehaviour {
 
     List<Database.row> getScores()
     {
+        Database DB = gameObject.AddComponent<Database>();
         List<Database.row> scoreList;
         DB.initDB();
         scoreList = DB.sortTime();
@@ -39,6 +39,8 @@ public class loadScores : MonoBehaviour {
     {
         string name = row.name;
         TimeSpan time = row.time;
+        Debug.Log(time.ToString());
+        Debug.Log("hours " + time.Hours.ToString());
         string line = (position + 1).ToString() + ". " + name + " " + time.Minutes + ":" + time.Seconds + ":" + time.Milliseconds;
         string objName = "Name" + (position + 1).ToString();
         GameObject.Find(objName).GetComponent<UnityEngine.UI.Text>().text = line;
