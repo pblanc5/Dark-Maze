@@ -91,6 +91,22 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &6784521 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1990039285048006, guid: b3c71946e829f094eb81dcf6648d0294,
+    type: 2}
+  m_PrefabInternal: {fileID: 170669319}
+--- !u!114 &6784528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 6784521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b116494d336ac664f99ed4d775e8194e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &170669319
 Prefab:
   m_ObjectHideFlags: 0
@@ -177,6 +193,14 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 2}
   m_IsPrefabParent: 0
@@ -189,6 +213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1132833657}
   - component: {fileID: 1132833656}
+  - component: {fileID: 1132833658}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -221,6 +246,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1132833658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1132833655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbecf9a5ae4839c4293dc4ef1e952aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1891220560
 GameObject:
   m_ObjectHideFlags: 0
