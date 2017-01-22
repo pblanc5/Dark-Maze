@@ -50,6 +50,7 @@ MonoBehaviour:
   wallPrefab: {fileID: 11400000, guid: 73d47559dfa17474db97ad772a66ab6c, type: 2}
   player: {fileID: 0}
   goal: {fileID: 0}
+  jammer: {fileID: 1161266805216832, guid: d858799ea595f2c43b52f1bb37338563, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
