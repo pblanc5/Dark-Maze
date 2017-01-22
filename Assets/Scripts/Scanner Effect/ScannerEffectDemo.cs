@@ -88,7 +88,7 @@ public class ScannerEffectDemo : MonoBehaviour
 
     public void OnTriggerEnter(Collider jammer)
     {
-        if (jammer.gameObject.name.Equals("Jammer"))
+        if (jammer.gameObject.name.Equals("Jammer(Clone)"))
             MaxScan = 3;
         else if (jammer.gameObject.name.Equals("JammerTrig"))
         {
