@@ -1,7 +1,7 @@
 # Dark-Maze
 
 ## Developers
-+ Thomas Cullota
++ Thomas Culotta
 + Patrick Blanchard
 + Tyler Bellue
 + Mike Zielewski
