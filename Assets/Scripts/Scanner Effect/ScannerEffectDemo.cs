@@ -56,7 +56,7 @@ public class ScannerEffectDemo : MonoBehaviour
             }
         }
 
-        if (OVRInput.GetDown(OVRInput.Button.One) && !scandelay)
+        if (SteamVR_Controller.Input(1).GetHairTriggerDown() && !scandelay)
 		{
             scandelay = true;
 			_scanning = true;
