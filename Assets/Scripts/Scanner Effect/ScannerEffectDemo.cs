@@ -17,6 +17,8 @@ public class ScannerEffectDemo : MonoBehaviour
     private AudioSource pingsound;
     private AudioSource goalpingsound;
 
+    private SteamVR_TrackedController handL, handR;
+
     private Vector3 ScannerOriginPosition;
     private float goaldistance;
     private bool goalpinged;
@@ -24,6 +26,12 @@ public class ScannerEffectDemo : MonoBehaviour
 	bool _scanning;
     bool scandelay;
     float scandelaytime;
+
+    private void Awake()
+    {
+    }
+
+    (
 
 	void Start()
 	{
@@ -55,6 +63,18 @@ public class ScannerEffectDemo : MonoBehaviour
                 GoalScanDistance = 0;
             }
         }
+
+        if (SteamVR_Controller.Input(1).GetHairTriggerDown())
+            print("trigger");
+        if (SteamVR_Controller.Input(1).())
+            print("trigger");
+        if (SteamVR_Controller.Input(1).GetHairTriggerDown())
+            print("trigger");
+        if (SteamVR_Controller.Input(1).GetHairTriggerDown())
+            print("trigger");
+        if (SteamVR_Controller.Input(1).GetHairTriggerDown())
+            print("trigger");
+
 
         if (SteamVR_Controller.Input(1).GetHairTriggerDown() && !scandelay)
 		{
