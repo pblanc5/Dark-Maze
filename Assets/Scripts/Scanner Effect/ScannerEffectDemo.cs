@@ -20,6 +20,7 @@ public class ScannerEffectDemo : MonoBehaviour
     private AudioSource goalpingsound;
     
     private Transform container;
+    private CharacterController charactercontroller;
     private SteamVR_Controller.Device handL, handR;
     ulong trigger  = SteamVR_Controller.ButtonMask.Trigger;
     ulong touchpad = SteamVR_Controller.ButtonMask.Touchpad;
@@ -41,6 +42,7 @@ public class ScannerEffectDemo : MonoBehaviour
         handR = SteamVR_Controller.Input(index);
 
         container = transform.parent;
+        charactercontroller = container.GetComponent<CharacterController>();
     }
 
 	void Start()
@@ -94,8 +96,10 @@ public class ScannerEffectDemo : MonoBehaviour
             corrected.Rotate(-corrected.rotation.eulerAngles.x, 0f, -corrected.rotation.eulerAngles.z);
             float deltaX = movespeed * Time.deltaTime * handL.GetAxis().x;
             float deltaY = movespeed * Time.deltaTime * handL.GetAxis().y;
-            container.Translate(deltaX, 0f, 0f, corrected);
-            container.Translate(0f, 0f, deltaY, corrected);
+            Vector3 movement = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f) * new Vector3(deltaX, 0f, deltaY);
+            charactercontroller.Move(movement);
+            //container.Translate(deltaX, 0f, 0f, corrected);
+            //container.Translate(0f, 0f, deltaY, corrected);
         }
 
         if (handR.GetPress(touchpad))
