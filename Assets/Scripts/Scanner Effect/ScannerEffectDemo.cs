@@ -18,8 +18,8 @@ public class ScannerEffectDemo : MonoBehaviour
     private float MaxScan;
     private AudioSource pingsound;
     private AudioSource goalpingsound;
-
-    private Transform rig;
+    
+    private Transform container;
     private SteamVR_Controller.Device handL, handR;
     ulong trigger  = SteamVR_Controller.ButtonMask.Trigger;
     ulong touchpad = SteamVR_Controller.ButtonMask.Touchpad;
@@ -40,7 +40,7 @@ public class ScannerEffectDemo : MonoBehaviour
         index = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
         handR = SteamVR_Controller.Input(index);
 
-        rig = transform.parent;
+        container = transform.parent;
     }
 
 	void Start()
@@ -48,17 +48,13 @@ public class ScannerEffectDemo : MonoBehaviour
         GameObject goal  = GameObject.FindGameObjectWithTag("Finish");
         GoalOrigin       = goal.transform;
         ScanDistance     = 0;
-        ScanSpeed        = 3;
         GoalScanDistance = 0;
-        GoalScanSpeed    = 7;
         goaldistance     = 0;
         MaxScan          = -1;
         pingsound        = gameObject.GetComponent<AudioSource>();
         goalpingsound    = goal.GetComponent<AudioSource>();
         scandelay        = false;
         scandelaytime    = 1f;
-        movespeed        = 1f;
-        rotspeed         = 1f;
     }
 
 	void Update()
@@ -98,14 +94,14 @@ public class ScannerEffectDemo : MonoBehaviour
             corrected.Rotate(-corrected.rotation.eulerAngles.x, 0f, -corrected.rotation.eulerAngles.z);
             float deltaX = movespeed * Time.deltaTime * handL.GetAxis().x;
             float deltaY = movespeed * Time.deltaTime * handL.GetAxis().y;
-            rig.Translate(deltaX, 0f, 0f, corrected);
-            rig.Translate(0f, 0f, deltaY, corrected);
+            container.Translate(deltaX, 0f, 0f, corrected);
+            container.Translate(0f, 0f, deltaY, corrected);
         }
 
         if (handR.GetPress(touchpad))
         {
-            if      (handR.GetAxis().x > 0.2f)  transform.Rotate(0f, rotspeed * Time.deltaTime, 0f);
-            else if (handR.GetAxis().x < -0.2f) transform.Rotate(0f, -rotspeed * Time.deltaTime, 0f);
+            float deltaX = rotspeed * Time.deltaTime * handR.GetAxis().x * 100;
+            container.Rotate(0f, deltaX, 0f);
         }
     }
 
