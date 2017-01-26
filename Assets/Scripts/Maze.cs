@@ -95,7 +95,7 @@ public class Maze : MonoBehaviour {
         {
             flag = true;
             player.transform.parent = transform;
-            player.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f * scale + 0.5f, 1.1f, coordinates.z - size.z * 0.5f * scale + 0.5f);
+            player.transform.localPosition = new Vector3(coordinates.x - size.x * 0.5f * scale + 0.5f, -0.08f, coordinates.z - size.z * 0.5f * scale + 0.5f);
         }
         else if (coordinates.x == size.x - 1 && nogoal)
         {

@@ -8,6 +8,8 @@ public class ScannerEffectDemo : MonoBehaviour
 	public Material EffectMaterial;
 	public float ScanDistance;
     public float ScanSpeed;
+    public float movespeed;
+    public float rotspeed;
 
     private Transform GoalOrigin;
     public float GoalScanDistance;
@@ -17,7 +19,10 @@ public class ScannerEffectDemo : MonoBehaviour
     private AudioSource pingsound;
     private AudioSource goalpingsound;
 
-    private SteamVR_TrackedController handL, handR;
+    private Transform rig;
+    private SteamVR_Controller.Device handL, handR;
+    ulong trigger  = SteamVR_Controller.ButtonMask.Trigger;
+    ulong touchpad = SteamVR_Controller.ButtonMask.Touchpad;
 
     private Vector3 ScannerOriginPosition;
     private float goaldistance;
@@ -29,24 +34,31 @@ public class ScannerEffectDemo : MonoBehaviour
 
     private void Awake()
     {
-    }
+        int index = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
+        handL = SteamVR_Controller.Input(index);
 
-    (
+        index = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
+        handR = SteamVR_Controller.Input(index);
+
+        rig = transform.parent;
+    }
 
 	void Start()
 	{
         GameObject goal  = GameObject.FindGameObjectWithTag("Finish");
         GoalOrigin       = goal.transform;
         ScanDistance     = 0;
-        ScanSpeed        = 4;
+        ScanSpeed        = 3;
         GoalScanDistance = 0;
-        GoalScanSpeed    = 10;
+        GoalScanSpeed    = 7;
         goaldistance     = 0;
         MaxScan          = -1;
         pingsound        = gameObject.GetComponent<AudioSource>();
         goalpingsound    = goal.GetComponent<AudioSource>();
         scandelay        = false;
         scandelaytime    = 1f;
+        movespeed        = 1f;
+        rotspeed         = 1f;
     }
 
 	void Update()
@@ -63,21 +75,11 @@ public class ScannerEffectDemo : MonoBehaviour
                 GoalScanDistance = 0;
             }
         }
-
-        if (SteamVR_Controller.Input(1).GetHairTriggerDown())
-            print("trigger");
-        if (SteamVR_Controller.Input(1).())
-            print("trigger");
-        if (SteamVR_Controller.Input(1).GetHairTriggerDown())
-            print("trigger");
-        if (SteamVR_Controller.Input(1).GetHairTriggerDown())
-            print("trigger");
-        if (SteamVR_Controller.Input(1).GetHairTriggerDown())
-            print("trigger");
-
-
-        if (SteamVR_Controller.Input(1).GetHairTriggerDown() && !scandelay)
+        
+        if ((handL.GetPressDown(trigger) || handR.GetPressDown(trigger)) && !scandelay)
 		{
+            handL.TriggerHapticPulse(1000);
+            handR.TriggerHapticPulse(1000);
             scandelay = true;
 			_scanning = true;
 			ScanDistance = 0;
@@ -89,7 +91,23 @@ public class ScannerEffectDemo : MonoBehaviour
             scandelaytime = MaxScan == -1 ? (goaldistance / ScanSpeed + goaldistance / GoalScanSpeed) : 1f;
             StartCoroutine(WaitForGoalPing());
 		}
-	}
+
+        if (handL.GetPress(touchpad))
+        {
+            Transform corrected = transform;
+            corrected.Rotate(-corrected.rotation.eulerAngles.x, 0f, -corrected.rotation.eulerAngles.z);
+            float deltaX = movespeed * Time.deltaTime * handL.GetAxis().x;
+            float deltaY = movespeed * Time.deltaTime * handL.GetAxis().y;
+            rig.Translate(deltaX, 0f, 0f, corrected);
+            rig.Translate(0f, 0f, deltaY, corrected);
+        }
+
+        if (handR.GetPress(touchpad))
+        {
+            if      (handR.GetAxis().x > 0.2f)  transform.Rotate(0f, rotspeed * Time.deltaTime, 0f);
+            else if (handR.GetAxis().x < -0.2f) transform.Rotate(0f, -rotspeed * Time.deltaTime, 0f);
+        }
+    }
 
     private IEnumerator WaitForGoalPing()
     {
